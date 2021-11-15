@@ -10,8 +10,8 @@ import javax.swing.JFrame;
  * 
  */
 public final class SimpleGUI {
-
-    private final JFrame frame = new JFrame();
+    public static String TITLE = "My first java graphical interface";
+    private final JFrame frame = new JFrame(SimpleGUI.TITLE);
 
     /*
      * Once the Controller is done, implement this class in such a way that:
@@ -47,6 +47,8 @@ public final class SimpleGUI {
          * MUCH better than manually specify the size of a window in pixel: it
          * takes into account the current resolution.
          */
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int sw = (int) screen.getWidth();
         final int sh = (int) screen.getHeight();
@@ -57,6 +59,10 @@ public final class SimpleGUI {
          * on screen. Results may vary, but it is generally the best choice.
          */
         frame.setLocationByPlatform(true);
+        frame.setVisible(true);
+    }
+    public static void main(final String... args) {
+        new SimpleGUI();
     }
 
 }
