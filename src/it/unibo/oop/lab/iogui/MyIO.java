@@ -5,7 +5,11 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Random;
 
@@ -58,13 +62,22 @@ public class MyIO {
         read.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("bottone premuto");
-                
+            public void actionPerformed(final ActionEvent e) {
+                try (DataInputStream is = new DataInputStream(new FileInputStream(PATH))) {
+                    System.out.println(is.readInt());
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e2) {
+                    // TODO Auto-generated catch block
+                    e2.printStackTrace();
+                }
             }
-            
         });
     }
+    /**
+     * 
+     * 
+     */
     void display() {
         /*
          * Make the frame one fifth the resolution of the screen. This very method is
