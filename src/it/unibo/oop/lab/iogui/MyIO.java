@@ -9,36 +9,29 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Random;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-/**
- * This class is a simple application that writes a random number on a file.
- * 
- * This application does not exploit the model-view-controller pattern, and as
- * such is just to be used to learn the basics, not as a template for your
- * applications.
- */
-public class BadIOGUI {
-
-    private static final String TITLE = "A very simple GUI application";
+public class MyIO {
+    private static final String TITLE = "My IO-GUI application";
     private static final String PATH = System.getProperty("user.home")
             + System.getProperty("file.separator")
             + BadIOGUI.class.getSimpleName() + ".txt";
     private static final int PROPORTION = 5;
     private final Random rng = new Random();
     private final JFrame frame = new JFrame(TITLE);
-
-    /**
-     * 
-     */
-    public BadIOGUI() {
+    public MyIO() {
         final JPanel canvas = new JPanel();
+
         canvas.setLayout(new BorderLayout());
         final JButton write = new JButton("Write on file");
-        canvas.add(write, BorderLayout.CENTER);
+        final JButton read = new JButton("Read from file");
+        canvas.setLayout(new BoxLayout(canvas, BoxLayout.X_AXIS));
+        canvas.add(write, BorderLayout.NORTH);
+        canvas.add(read, write.getWidth());
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
@@ -62,9 +55,17 @@ public class BadIOGUI {
                 }
             }
         });
-    }
+        read.addActionListener(new ActionListener() {
 
-    private void display() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("bottone premuto");
+                
+            }
+            
+        });
+    }
+    void display() {
         /*
          * Make the frame one fifth the resolution of the screen. This very method is
          * enough for a single screen setup. In case of multiple monitors, the
@@ -89,11 +90,4 @@ public class BadIOGUI {
         frame.setVisible(true);
     }
 
-    /**
-     * @param args ignored
-     */
-    public static void main(final String... args) {
-       new BadIOGUI().display();
-       new MyIO().display();
-    }
 }
